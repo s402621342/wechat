@@ -36,9 +36,11 @@
 											
 										</div>
 										<div class="item-title-row">
-											<div class="item-subtitle">${item.date }</div>
-											<div class="item-after">${item.autor }</div>
-											<div class="item-after">${item.state }</div>
+											<div class="item-subtitle">${item.autor }</div>
+										</div>
+										<div class="item-title-row">
+											<div class="item-subtitle">${item.state }</div>
+											<div class="item-after">${item.date }</div>
 										</div>
 									</div>
 							</a></li>

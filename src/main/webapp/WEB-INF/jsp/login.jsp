@@ -12,44 +12,68 @@
 <script src="js/demos.js"></script>
 <script src="js/zepto.js"></script>
 <script src="js/config.js"></script>
+<script type="text/javascripte">
+	function checkUser(){
+		$.ajax({
+			type:"POST",
+			url:"checklogin",
+			data:{
+				"username"=username,
+				"password"=password
+			},
+			dataType:json,
+			success:function(data){
+				window.location.href("getCheck");
 
+			}
+		})
+		
+	}
+
+</script>
 </head>
 <body>
 	<div class="content">
-		 <form method="post" action="checklogin">
-		 <div class="list-block">
-    <ul>
-      <!-- Text inputs -->
-      <li>
-        <div class="item-content">
-          <div class="item-media"><i class="icon icon-form-name"></i></div>
-          <div class="item-inner">
-            <div class="item-title label">用户名</div>
-            <div class="item-input">
-              <input type="text" placeholder="Your name" name="username"/>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="item-content">
-          <div class="item-media"><i class="icon icon-form-password"></i></div>
-          <div class="item-inner">
-            <div class="item-title label">密码</div>
-            <div class="item-input">
-              <input type="password" placeholder="Password" name="password" />
-            </div>
-          </div>
-        </div>
-      </li>
-      </ul>
-      </div>
-<div class="content-block">
-			<div class="row">
-					<input class="button button-big button-fill button-success" type="submit" value="登录">
+		<form method="post" action="checklogin">
+			<div class="list-block">
+				<ul>
+					<!-- Text inputs -->
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="icon icon-form-name"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">用户名</div>
+								<div class="item-input">
+									<input type="text" placeholder="Your name" name="username" />
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-media">
+								<i class="icon icon-form-password"></i>
+							</div>
+							<div class="item-inner">
+								<div class="item-title label">密码</div>
+								<div class="item-input">
+									<input type="password" placeholder="Password" name="password" />
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</div>     
-      </form>
+			<div class="content-block">
+				<div class="row">
+					<input class="button button-big button-fill button-success"
+						type="submit" value="登录">
+						<a onclick="checkUser()"></a>
+				</div>
+			</div>
+		</form>
 	</div>
 	<script src="js/sm.js"></script>
 	<script src="js/sm-city-picker.js"></script>

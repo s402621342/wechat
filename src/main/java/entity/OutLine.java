@@ -1,12 +1,29 @@
 package entity;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("listitem")
 public class OutLine {
-	private long id;
+	
+	@XStreamAlias("itemid")
+	private String id;
+	
+	@XStreamAlias("title")
 	private String title;
+	
+	@XStreamAlias("field3")
 	private String date;
+	
+	@XStreamAlias("field1")
 	private String autor;
+	
+	@XStreamAlias("field2")
 	private String state;
-	public OutLine(long id, String title, String date, String autor, String state) {
+	
+	@XStreamAlias("canopen")
+	private long canopen;
+	
+	public OutLine(String id, String title, String date, String autor, String state) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -14,10 +31,10 @@ public class OutLine {
 		this.autor = autor;
 		this.state = state;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -43,6 +60,12 @@ public class OutLine {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public long getCanopen() {
+		return canopen;
+	}
+	public void setCanopen(long canopen) {
+		this.canopen = canopen;
 	}
 	
 	

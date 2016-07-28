@@ -5,17 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.stereotype.Service;
 
 import entity.Information;
+import entity.ListXML;
 import entity.OutLine;
 import entity.Procedure;
+import entity.TransferXML;
 import entity.View;
-import service.checkService;
+import service.CheckService;
+import wechat.Connection.HttpHelp;
 @Service
-public class checkServiceImpl implements checkService{
+public class CheckServiceImpl implements CheckService{
 
-	public Information getInformation(long id) {
+	public Information getInformation(String id) {
 		// TODO Auto-generated method stub
 		String title="关于同意中共上海先进半导体制造股份有限公司委员会增补委员选举结果的批复";
 		String number="沪化区投委(2015)19号";
@@ -45,10 +50,19 @@ public class checkServiceImpl implements checkService{
 		return information;
 	}
 
-	public List<OutLine> getOutLines(String username) {
+	public List<OutLine> getOutLines(Cookie[] cookies) {
 		// TODO Auto-generated method stub
-		List<OutLine> outLines=new ArrayList<OutLine>();
-		outLines.add(new OutLine(1, "关于同意中共上海先进半导体制造股份有限公司委员会增补委员选举结果的批复","2015-12-21 14:38", "唐隆昱", "审批中"));
+		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/list?openagent&type=swdb&requestSearch=&RowNum=0&PageSize=10";
+		String cookieStr="";
+		for(int i=0;i<cookies.length;i++){
+			if(i!=0){
+				cookieStr+=";";
+			}
+			cookieStr+=cookies[i].getName()+"="+cookies[i].getValue();
+		}
+		String response=HttpHelp.getResponseByCookie(url, "", cookieStr);
+		ListXML xmls=TransferXML.toBean(response, ListXML.class);
+		List<OutLine> outLines=xmls.getOutline();
 		return outLines;
 	}
 

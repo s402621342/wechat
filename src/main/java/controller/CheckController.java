@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import entity.Information;
-import service.checkService;
+import service.CheckService;
 
 @Controller
 public class CheckController {
@@ -18,13 +18,13 @@ public class CheckController {
 	private static final String DETAIL="detail";
 	
 	@Autowired
-	private checkService checkService;
+	private CheckService checkService;
 	
 	
 	
 	@RequestMapping(value = "/check", method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(HttpServletRequest request,  Map<String, Object> map) {
-		Long id =Long.parseLong(request.getParameter("id"));
+		String id =request.getParameter("id");
 		Information information=checkService.getInformation(id);
 		map.put("information", information);
 		return DETAIL;
