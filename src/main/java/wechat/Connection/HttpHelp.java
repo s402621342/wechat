@@ -53,7 +53,6 @@ public class HttpHelp {
 	  	  } catch (Exception e) {
 	  	   e.printStackTrace();
 	  	  }
-	  	  System.out.println(response);
 	  	  postMethod.releaseConnection();
 	  	  return response;
 	}

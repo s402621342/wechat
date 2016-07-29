@@ -1,58 +1,29 @@
 package service.Impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.Cookie;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import entity.Information;
-import entity.ListXML;
 import entity.OutLine;
-import entity.Procedure;
-import entity.TransferXML;
-import entity.View;
+import entity.Tab;
 import service.CheckService;
 import wechat.Connection.HttpHelp;
 @Service
 public class CheckServiceImpl implements CheckService{
 
-	public Information getInformation(String id) {
-		// TODO Auto-generated method stub
-		String title="关于同意中共上海先进半导体制造股份有限公司委员会增补委员选举结果的批复";
-		String number="沪化区投委(2015)19号";
-		String draftDate="2015-12-21";
-		String secret="一般";
-		String urgency="一般";
-		String drafter="唐隆昱";
-		String draftVerification="吴建华";
-		String subject="党建工作 增补委员 选举结果 批复";
-		String employer="中共上海先进半导体制造股份有限公司委员会";
-		String report="上海化学工业区发展有限公司党委";
-		String copy="";
-		String printDate="　 印发    共印3份";
-		String remark="";
-		String state="审批";
-		String text="http://bos.wenku.bdimg.com/v1/wenku15//979472c0df1e87d27408ed7a4f20ab86?responseContentDisposition=attachment%3B%20filename%3D%22%B0%D9%B6%C8%CE%C4%B5%B5.doc.doc%22&responseContentType=application%2Foctet-stream&responseCacheControl=no-cache&authorization=bce-auth-v1%2Ffa1126e91489401fa7cc85045ce7179e%2F2016-07-26T04%3A58%3A40Z%2F3600%2Fhost%2F61032335256fbf835d8f3f0babd847e9365961edcb73806ee271c96d5f5cf7bd&token=7c9d8434d953370d8a25ac15eed10a24174c988d84d54dd3e641c284ca01d4b5&expire=2016-07-26T05:58:40Z";
-		Map<String, String> attachment=new HashMap<String, String>();
-		attachment.put("2015年度项目建设审计情况汇总.docx", "http://bos.wenku.bdimg.com/v1/wenku15//979472c0df1e87d27408ed7a4f20ab86?responseContentDisposition=attachment%3B%20filename%3D%22%B0%D9%B6%C8%CE%C4%B5%B5.doc.doc%22&responseContentType=application%2Foctet-stream&responseCacheControl=no-cache&authorization=bce-auth-v1%2Ffa1126e91489401fa7cc85045ce7179e%2F2016-07-26T04%3A58%3A40Z%2F3600%2Fhost%2F61032335256fbf835d8f3f0babd847e9365961edcb73806ee271c96d5f5cf7bd&token=7c9d8434d953370d8a25ac15eed10a24174c988d84d54dd3e641c284ca01d4b5&expire=2016-07-26T05:58:40Z");
-		List<Procedure> procedures=new ArrayList<Procedure>();
-		procedures.add(new Procedure(1, "2015-12-21 14:34", "唐隆昱", "综合办公室", "起草"));
-		List<View> examineView=new ArrayList<View>();
-		examineView.add(new View("吴建华同志", "2015-12-21 14:38", "请党委委员阅。", "http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"));
-		List<View> readView=new ArrayList<View>();
-		readView.add(new View("戴鲲同志", "2015-12-22 10:34", "阅", "http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"));
-		Information information=new Information(id,title, number, draftDate, secret, urgency, drafter, draftVerification, subject,
-				employer, report, copy, printDate, remark, state, text, attachment, procedures, examineView, readView);
-		return information;
-	}
 
-	public List<OutLine> getOutLines(Cookie[] cookies) {
+	public List<OutLine> getOutLines(Cookie[] cookies,String type) {
 		// TODO Auto-generated method stub
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/list?openagent&type=swdb&requestSearch=&RowNum=0&PageSize=10";
+		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/list?openagent&type="+type+"&requestSearch=&RowNum=0&PageSize=10";
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -61,9 +32,54 @@ public class CheckServiceImpl implements CheckService{
 			cookieStr+=cookies[i].getName()+"="+cookies[i].getValue();
 		}
 		String response=HttpHelp.getResponseByCookie(url, "", cookieStr);
-		ListXML xmls=TransferXML.toBean(response, ListXML.class);
-		List<OutLine> outLines=xmls.getOutline();
+		List<OutLine> outLines=new ArrayList<>();
+		Document document=Jsoup.parse(response);
+		Elements elements=document.select("listitem");
+		for(Element element:elements){
+			String id=element.select("itemid").text();
+			String title=element.select("title").text();
+			String field1=element.select("field1").text();
+			String field2=element.select("field2").text();
+			String field3=element.select("field3").text();
+			Long canopen=Long.parseLong(element.select("canopen").text());
+			outLines.add(new OutLine(id, title, field3, field1, field2, canopen, type));
+		}
 		return outLines;
+	}
+
+	@Override
+	public List<Tab> getTabs(Cookie[] cookies) {
+		// TODO Auto-generated method stub
+		List<Tab> tabs=new ArrayList<Tab>();
+		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/tab?openagent&type=gw";
+		String cookieStr="";
+		for(int i=0;i<cookies.length;i++){
+			if(i!=0){
+				cookieStr+=";";
+			}
+			cookieStr+=cookies[i].getName()+"="+cookies[i].getValue();
+		}
+		String response=HttpHelp.getResponseByCookie(url, "", cookieStr);
+		
+		Document document=Jsoup.parse(response);
+		Elements elements=document.select("tab");
+		url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/count?openagent&type=gw";
+		response=HttpHelp.getResponseByCookie(url, "", cookieStr);
+		Document document2=Jsoup.parse(response);
+		for(Element element:elements){
+			String id=element.attr("id");
+			long count=0;
+			try{
+				count=Long.parseLong(document2.getElementById(id).attr("count"));
+			}catch(Exception e){
+				
+			}
+			String name=element.attr("title");
+			tabs.add(new Tab(id, name, count));
+		}
+		
+		Collections.sort(tabs);
+		return tabs;
 	}
 
 }

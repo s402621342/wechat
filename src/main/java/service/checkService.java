@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.Cookie;
 
-import entity.Information;
 import entity.OutLine;
+import entity.Tab;
 
 public interface CheckService {
-	Information getInformation(String id);
 	
-	List<OutLine> getOutLines(Cookie[] cookies);
+	List<OutLine> getOutLines(Cookie[] cookies,String type);
+	
+	List<Tab> getTabs(Cookie[] cookies);
 }

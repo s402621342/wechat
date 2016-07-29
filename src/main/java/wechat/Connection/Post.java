@@ -1,7 +1,6 @@
 package wechat.Connection;
 
 import entity.OutLine;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class Post {
@@ -28,7 +27,7 @@ public class Post {
 		data.put("date",object);
 		object.clear();
 		object.put("value", outLine.getState());
-		object.put("color", color);
+		object.put("color", color)	;
 		data.put("state",object);
 		
 		JSONObject finalObject=new JSONObject();
