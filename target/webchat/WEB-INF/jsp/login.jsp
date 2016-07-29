@@ -26,7 +26,7 @@
 			dataType:"json",
 			success:function(data){
 				if(data.success=="true"){
-					window.location.href="getCheck";
+					window.location.href="getTab";
 				}else{
 				 $.alert('用户名或密码错误');
 				}

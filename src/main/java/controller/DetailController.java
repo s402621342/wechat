@@ -23,8 +23,8 @@ public class DetailController {
 	@RequestMapping(value="/detail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String getTab(HttpServletRequest request,Map<String, Object> map){
 		Cookie[] cookies=request.getCookies();
-		String id=request.getParameter("type");
-		String type=request.getParameter("id");
+		String type=request.getParameter("type");
+		String id=request.getParameter("id");
 		Information information=detailService.getInformation(cookies, type, id);
 		map.put("information", information);
 		return DETAIL;

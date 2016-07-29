@@ -28,7 +28,7 @@
 				<c:forEach var="item" items="${outlines}">
 					<div class="list-block media-list">
 						<ul>
-							<li><a href="check?id=${item.id }"
+							<li><a href="detail?id=${item.id }&type=${item.type}"
 								class="item-link item-content">
 									<div class="item-inner">
 										<div class="item-title-row">

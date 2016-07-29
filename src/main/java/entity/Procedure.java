@@ -1,12 +1,12 @@
 package entity;
 
 public class Procedure {
-	private long number;
+	private String number;
 	private String date;
 	private String name;
 	private String department;
 	private String action;
-	public Procedure(long number, String date, String name, String department, String action) {
+	public Procedure(String number, String date, String name, String department, String action) {
 		super();
 		this.number = number;
 		this.date = date;
@@ -14,10 +14,10 @@ public class Procedure {
 		this.department = department;
 		this.action = action;
 	}
-	public long getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public String getDate() {
