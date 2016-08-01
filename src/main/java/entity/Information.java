@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Information {
+	private String id;
+	
+	private String type;
+
+	private boolean canOperate;
+	
 	private Map<String, String> outline;
 	
 	private Map<String, String> otherInfo;
@@ -22,17 +28,13 @@ public class Information {
 	private Map<ViewHead, List<View>> views;
 
 
-	public Map<ViewHead, List<View>> getViews() {
-		return views;
-	}
-
-	public void setViews(Map<ViewHead, List<View>> views) {
-		this.views = views;
-	}
-
-	public Information(Map<String, String> outline, Map<String, String> otherInfo, Map<String, String> attachment,
-			boolean hasText, Map<String, String> text, List<Procedure> procedures, Map<ViewHead, List<View>> views) {
+	public Information(String id, String type, boolean canOperate, Map<String, String> outline,
+			Map<String, String> otherInfo, Map<String, String> attachment, boolean hasText, Map<String, String> text,
+			List<Procedure> procedures, Map<ViewHead, List<View>> views) {
 		super();
+		this.id = id;
+		this.type = type;
+		this.canOperate = canOperate;
 		this.outline = outline;
 		this.otherInfo = otherInfo;
 		this.attachment = attachment;
@@ -42,6 +44,46 @@ public class Information {
 		this.views = views;
 	}
 
+
+
+	public boolean isCanOperate() {
+		return canOperate;
+	}
+
+
+
+	public void setCanOperate(boolean canOperate) {
+		this.canOperate = canOperate;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	public Map<ViewHead, List<View>> getViews() {
+		return views;
+	}
+
+	public void setViews(Map<ViewHead, List<View>> views) {
+		this.views = views;
+	}
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public Map<String, String> getOutline() {
 		return outline;
 	}

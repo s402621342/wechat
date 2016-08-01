@@ -211,9 +211,15 @@
 	</div>
 		</div>
 	<div class="content-block">
-		<div class="row">
-			<a href="#" class="button button-big button-fill button-success">提交</a>
-		</div>
+		<c:if test="${information.canOperate }">
+			<div class="row">
+		 		<a href="submit?type=${information.type }&id=${information.id}" class="button button-big button-fill button-success">提交</a>
+			</div>
+		</c:if>
+		<c:if test="${information.canOperate==false }">
+			请在电脑端处理
+		</c:if>
+		
 	</div>
 </div>
 <script src="js/sm.js"></script>

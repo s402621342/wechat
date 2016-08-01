@@ -11,7 +11,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.wiring.BeanWiringInfo;
 import org.springframework.stereotype.Service;
 
 import entity.Information;
@@ -44,6 +43,10 @@ public class DetailServiceImpl implements DetailService {
 		Map<ViewHead, List<View>> views=new HashMap<>();
 		
 		List<Procedure> procedures=new ArrayList<>();
+		
+		boolean canOperate;
+		
+		
 		Elements elements=document.getElementsByAttributeValue("title", "概要");
 		for(Element element:elements){
 			Elements elements2=element.select("td");
@@ -109,15 +112,17 @@ public class DetailServiceImpl implements DetailService {
 					
 				}
 				for(int j=4;j<elements3.size()-3;j+=4){
+					String sign=elements3.select("img").get(0).attr("src");
 					views2.add(new View(elements3.get(j).text(), elements3.get(j+1).text(), elements3.get(j+2).text()
-							, elements3.get(j+3).attr("src")));
+							, sign));
 				}
 			}
 			views.put(viewHead, views2);
 		}
-		
-		
-		return new Information(outline, otherInfo,attachment,text.size()>0,text,procedures,views);
+		document=Jsoup.parse(response);
+		elements=document.select("operation");
+		canOperate=(elements.size()>=1);
+		return new Information(id,type,canOperate,outline, otherInfo,attachment,text.size()>0,text,procedures,views);
 	}
 
 }
