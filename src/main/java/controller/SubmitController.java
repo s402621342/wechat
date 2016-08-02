@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import entity.Department;
 import entity.Operation;
 import service.SubmitService;
+import service.UserService;
 
 @Controller
 public class SubmitController {
@@ -22,6 +24,9 @@ public class SubmitController {
 	
 	@Autowired
 	private SubmitService submitService;
+	
+	@Autowired
+	private UserService UserService;
 	
 	
 	@RequestMapping(value="/submit",method={ RequestMethod.GET, RequestMethod.POST }) 
@@ -32,6 +37,12 @@ public class SubmitController {
 		String id=request.getParameter("id");
 		List<Operation> operations=submitService.getOperation(cookies, type, id);
 		map.put("operations", operations);
+		for(Operation operation:operations){
+			if(operation.isHasOptions()&&operation.getOptions().size()==0){
+				List<Department> departments=UserService.getDepartments(cookies);
+				map.put("departments", departments);
+			}
+		}
 		return SUBMIT;
 	}
 	

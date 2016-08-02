@@ -112,7 +112,12 @@ public class DetailServiceImpl implements DetailService {
 					
 				}
 				for(int j=4;j<elements3.size()-3;j+=4){
-					String sign=elements3.select("img").get(0).attr("src");
+					String sign="";
+					try{
+						elements3.select("img").get(0).attr("src");
+					}catch(Exception e){
+						
+					}
 					views2.add(new View(elements3.get(j).text(), elements3.get(j+1).text(), elements3.get(j+2).text()
 							, sign));
 				}

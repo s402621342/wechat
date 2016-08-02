@@ -47,6 +47,7 @@ public class SubmitServiceImpl implements SubmitService {
 			String checkdate="";
 			boolean multi=false;
 			List<String> options=new ArrayList<>();
+			boolean hasOptions=false;
 			
 			
 			Elements elements2=element.getElementsByAttributeValue("name", "actionnum");
@@ -76,6 +77,7 @@ public class SubmitServiceImpl implements SubmitService {
 			}
 			elements2=element.select("user");
 			if(elements2.size()>0){
+				hasOptions=true;
 				Element element2=elements2.get(0);
 				multi=element2.attr("multi").equals("true");
 				elements2=element2.select("option");
@@ -83,8 +85,7 @@ public class SubmitServiceImpl implements SubmitService {
 					options.add(element3.attr("value"));
 				}
 			}
-			JSONArray array=JSONArray.fromObject(options);
-			operations.add(new Operation(actionnum, nextstepusername, nextnode, actionname, fieldapproval, documentid, checkdate, array.toString(), multi));
+			operations.add(new Operation(actionnum, nextstepusername, nextnode, actionname, fieldapproval, documentid, checkdate,hasOptions, options, multi));
 		}
 		return operations;
 	}

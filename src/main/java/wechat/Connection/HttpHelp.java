@@ -4,6 +4,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 
 public class HttpHelp {
 	public static String createhttpClient(String url,String param) {
@@ -31,6 +32,7 @@ public class HttpHelp {
 	  	  RequestEntity entity=new StringRequestEntity(param);
 	  	  postMethod.setRequestEntity(entity);
 	  	  try{
+	  		  postMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
 	  		client.executeMethod(postMethod);
 	  	  } catch (Exception e) {
 	  	   e.printStackTrace();

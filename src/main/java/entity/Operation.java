@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.List;
+
 public class Operation {
 	String actionnum;
 	String nextstepusername;
@@ -8,10 +10,13 @@ public class Operation {
 	boolean fieldapproval;
 	String documentid;
 	String checkdate;
-	String  options;
+	boolean hasOptions;
+	List<String>  options;
 	boolean multi;
+	
 	public Operation(String actionnum, String nextstepusername, String nextnode, String actionname,
-			boolean fieldapproval, String documentid, String checkdate, String options, boolean multi) {
+			boolean fieldapproval, String documentid, String checkdate, boolean hasOptions, List<String> options,
+			boolean multi) {
 		super();
 		this.actionnum = actionnum;
 		this.nextstepusername = nextstepusername;
@@ -20,6 +25,7 @@ public class Operation {
 		this.fieldapproval = fieldapproval;
 		this.documentid = documentid;
 		this.checkdate = checkdate;
+		this.hasOptions = hasOptions;
 		this.options = options;
 		this.multi = multi;
 	}
@@ -65,17 +71,24 @@ public class Operation {
 	public void setCheckdate(String checkdate) {
 		this.checkdate = checkdate;
 	}
-	public String getOptions() {
-		return options;
-	}
-	public void setOptions(String options) {
-		this.options = options;
-	}
+	
 	public boolean isMulti() {
 		return multi;
 	}
 	public void setMulti(boolean multi) {
 		this.multi = multi;
+	}
+	public List<String> getOptions() {
+		return options;
+	}
+	public void setOptions(List<String> options) {
+		this.options = options;
+	}
+	public boolean isHasOptions() {
+		return hasOptions;
+	}
+	public void setHasOptions(boolean hasOptions) {
+		this.hasOptions = hasOptions;
 	}
 	
 	

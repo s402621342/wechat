@@ -35,9 +35,14 @@ public class LoginController {
 	@RequestMapping(value="/checklogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public 	@ResponseBody String login(HttpServletRequest request,
 			Map<String, Object> map,HttpServletResponse response){
+		try{
+			request.setCharacterEncoding("utf-8");
+		}catch(Exception e){
+			
+		}
+		try{
 		String username=request.getParameter("username"); 
 		String password=request.getParameter("password");
-		try{
 			Cookie cookie=loginService.login(username, password);
 			response.addCookie(cookie);
 			map.put("success", "true");
