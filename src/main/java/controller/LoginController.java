@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import Exception.InvalidUserException;
+import model.User;
 import net.sf.json.JSONObject;
 import service.LoginService;
+import service.UserService;
+import wechat.Connection.OpenID;
 
 
 @Controller
@@ -24,12 +27,33 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	@Autowired
+	private UserService userService;
+	
 	//载入登录界面
 	@RequestMapping(value="/login", method = { RequestMethod.GET, RequestMethod.POST })
-	public String prelogin(HttpServletRequest request){
-//		String code=request.getParameter("code");
-//		System.out.println(OpenID.getOpenID(code));
-		return LOGIN;
+	public String prelogin(HttpServletRequest request,Map<String, Object> map,HttpServletResponse response){
+		String code=request.getParameter("code");
+		String openId="";
+		openId=OpenID.getOpenID(code);
+		User user=userService.getUserByID(openId);
+		if(user!=null){
+			String username=user.getUsername();
+			String password=user.getPassword();
+			try{
+				Cookie cookie=loginService.login(username, password);
+				response.addCookie(cookie);
+				return "redirect:/getTab";
+			}catch(InvalidUserException e){									//密码更改
+				request.getSession().setAttribute("openid", openId);
+				return LOGIN;
+			}
+		}else{
+		
+			request.getSession().setAttribute("openid", openId);
+			
+			return LOGIN;
+		}
 	}
 	
 	@RequestMapping(value="/checklogin", method = { RequestMethod.GET, RequestMethod.POST })
@@ -41,11 +65,17 @@ public class LoginController {
 			
 		}
 		try{
-		String username=request.getParameter("username"); 
-		String password=request.getParameter("password");
+			String username=request.getParameter("username"); 
+			String password=request.getParameter("password");
+			String openid=(String)request.getSession().getAttribute("openid");
 			Cookie cookie=loginService.login(username, password);
 			response.addCookie(cookie);
 			map.put("success", "true");
+			User user=new User();
+			user.setId(openid);
+			user.setPassword(password);
+			user.setUsername(username);
+			userService.addUser(user);
 		}catch(InvalidUserException e){
 			map.put("success", "false");
 		}

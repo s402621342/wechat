@@ -55,10 +55,10 @@ public class Property {
 		}
 		
 	}
-	public static String getCheckIDUri(){
+	public static String getDetailUri(){
 		try{
 			Properties properties=getProperties();
-			return properties.getProperty("checkiduri");
+			return properties.getProperty("detailuri");
 		}catch(Exception e){
 			return "";
 		}

@@ -15,9 +15,7 @@ public class HttpHelp {
 	  	  postMethod.setRequestEntity(entity);
 	  	  try{
 	  		client.executeMethod(postMethod);
-	  	   response = new String(postMethod.getResponseBodyAsString()
-	  	     .getBytes("ISO-8859-1"), "utf-8");
-	  	     //这里要注意下 gb2312要和你抓取网页的编码要一样
+	  		 response = postMethod.getResponseBodyAsString();
 	  	  } catch (Exception e) {
 	  	   e.printStackTrace();
 	  	  }
@@ -32,7 +30,6 @@ public class HttpHelp {
 	  	  RequestEntity entity=new StringRequestEntity(param);
 	  	  postMethod.setRequestEntity(entity);
 	  	  try{
-	  		  postMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
 	  		client.executeMethod(postMethod);
 	  	  } catch (Exception e) {
 	  	   e.printStackTrace();

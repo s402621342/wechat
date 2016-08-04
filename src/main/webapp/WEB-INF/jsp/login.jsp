@@ -21,7 +21,7 @@
 			url:"checklogin",
 			data:{
 				"username": username,
-				"password": password
+				"password": password,
 			},
 			dataType:"json",
 			success:function(data){

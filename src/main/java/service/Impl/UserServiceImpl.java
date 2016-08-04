@@ -10,14 +10,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.UserDAO;
 import entity.Department;
+import model.User;
 import service.UserService;
 import wechat.Connection.HttpHelp;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private UserDAO userDAO;
+	
 	@Override
 	public List<Department> getDepartments(Cookie[] cookies) {
 		// TODO Auto-generated method stub
@@ -53,6 +59,18 @@ public class UserServiceImpl implements UserService {
 		}
 		return departments;
 		
+	}
+
+	@Override
+	public User getUserByID(String id) {
+		// TODO Auto-generated method stub
+		return userDAO.getUserByID(id);
+	}
+
+	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		userDAO.addUser(user);
 	}
 
 }

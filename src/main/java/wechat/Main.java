@@ -1,16 +1,37 @@
 package wechat;
 
 import wechat.Button.InitButton;
+import wechat.Connection.HttpHelp;
 
 public class Main 
 {
 	
     public static void main( String[] args )
     {
-       InitButton initButton=new InitButton();
-    	System.out.print(initButton.initButtons());
-//    	System.out.println(Post.post("o0CJjwVyXn36-uAO1esNQQYQFX84", new OutLine(1, 
-//    	"关于同意中共上海先进半导体制造股份有限公司委员会增补委员选举结果的批复","2015-12-21 14:38", "唐隆昱", "审批中")));
+    	String type="swdb";
+    	String username="张莹本部";
+    	String title="测试";
+    	String msgid="082A3FBB4E1FC90148257EF500075FEE";
+    	String date="2015年4月3日";
+    	String autor="韩";
+    	String state="审核中";
+    	String PostItem="<?xml version=\"1.0\" encoding=\"utf-8\"?><root><form><item name=\"username\">"+username+"</item>"+
+			     "<item name=\"title\">"+title+"</item>"+
+			     "<item name=\"msgid\">"+msgid+"</item>"+
+			     "<item name=\"date\">"+date+"</item>"+
+			     "<item name=\"autor\">"+autor+"</item>"+
+			     "<item name=\"state\">"+state+"</item>"+
+			     "<item name=\"type\">"+type+"</item>"+
+								"</form></root>";
+    	
+    	try{
+    		PostItem=java.net.URLEncoder.encode(PostItem,"utf-8");
+    		PostItem=java.net.URLEncoder.encode(PostItem,"utf-8");
+    	}catch(Exception e){
+    		
+    	}
+    	String url="http://192.168.2.76:8080/wechat/post?PostItem="+PostItem;
+    	System.out.println(HttpHelp.createhttpClient(url, ""));
     }
     
     

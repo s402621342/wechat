@@ -15,6 +15,7 @@
 <script src="js/config.js"></script>
 
 </head>
+
 <div class="content">
 	<div class="content-block">
 		<div class="buttons-row">
