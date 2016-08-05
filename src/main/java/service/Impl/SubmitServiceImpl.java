@@ -18,6 +18,7 @@ import entity.Operation;
 import entity.SubmitEntity;
 import service.SubmitService;
 import wechat.Connection.HttpHelp;
+import wechat.Connection.Property;
 
 @Service
 public class SubmitServiceImpl implements SubmitService {
@@ -25,7 +26,7 @@ public class SubmitServiceImpl implements SubmitService {
 	@Override
 	public List<Operation> getOperation(Cookie[] cookies, String type, String id) {
 		// TODO Auto-generated method stub
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/detail?openagent&type="+type+"&msgid="+id;
+		String url=Property.getDetailInterface()+"&type="+type+"&msgid="+id;
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -100,7 +101,7 @@ public class SubmitServiceImpl implements SubmitService {
 	@Override
 	public Map<String, String> submit(Cookie[] cookies, SubmitEntity entity,String type,String id) {
 		// TODO Auto-generated method stub
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/submit?openagent";
+		String url=Property.getSubmitInterface();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){

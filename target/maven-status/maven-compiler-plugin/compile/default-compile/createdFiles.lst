@@ -8,14 +8,13 @@ wechat\Connection\Property.class
 controller\LoginController.class
 service\LoginService.class
 entity\Tab.class
-wechat\Connection\Post.class
 entity\OutLine.class
 wechat\Connection\HttpHelp.class
 wechat\Main.class
 wechat\Button\InitButton.class
 entity\Information.class
 entity\View.class
-Exception\InvalidUserException.class
 wechat\Connection\OpenID.class
 service\Impl\CheckServiceImpl.class
+exception\InvalidUserException.class
 controller\CheckController.class

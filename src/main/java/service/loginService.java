@@ -2,7 +2,7 @@ package service;
 
 import javax.servlet.http.Cookie;
 
-import Exception.InvalidUserException;
+import exception.InvalidUserException;
 
 public interface LoginService {
 	public Cookie login(String username,String password) throws InvalidUserException;

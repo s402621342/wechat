@@ -73,4 +73,77 @@ public class Property {
 		}
 		
 	}
+	public static String getLoginInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("loginInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getTabInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("tabInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getNotificationInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("notificationInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getListInterface(){
+		try{			
+			Properties properties=getProperties();
+			return properties.getProperty("listInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getDetailInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("detailInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getSubmitInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("submitInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getDepartmentInterface(){
+		try{
+			Properties properties=getProperties();
+			return properties.getProperty("departmentInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	public static String getUserInterface(){
+		try{			
+			Properties properties=getProperties();
+			return properties.getProperty("userListInterface");
+		}catch(Exception e){
+			return "";
+		}
+		
+	}
+	
 }

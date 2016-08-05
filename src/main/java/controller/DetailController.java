@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import Exception.InvalidUserException;
 import entity.Information;
+import exception.InvalidUserException;
 import model.User;
 import service.DetailService;
 import service.LoginService;

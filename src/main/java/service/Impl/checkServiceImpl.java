@@ -16,13 +16,14 @@ import entity.OutLine;
 import entity.Tab;
 import service.CheckService;
 import wechat.Connection.HttpHelp;
+import wechat.Connection.Property;
 @Service
 public class CheckServiceImpl implements CheckService{
 
 
 	public List<OutLine> getOutLines(Cookie[] cookies,String type) {
 		// TODO Auto-generated method stub
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/list?openagent&type="+type+"&requestSearch=&RowNum=0&PageSize=10";
+		String url=Property.getListInterface()+"&type="+type+"&requestSearch=&RowNum=0&PageSize=10";
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -50,7 +51,7 @@ public class CheckServiceImpl implements CheckService{
 	public List<Tab> getTabs(Cookie[] cookies) {
 		// TODO Auto-generated method stub
 		List<Tab> tabs=new ArrayList<Tab>();
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/tab?openagent&type=gw";
+		String url=Property.getTabInterface()+"&type=gw";
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -62,7 +63,7 @@ public class CheckServiceImpl implements CheckService{
 		
 		Document document=Jsoup.parse(response);
 		Elements elements=document.select("tab");
-		url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/count?openagent&type=gw";
+		url=Property.getNotificationInterface()+"&type=gw";
 		response=HttpHelp.getResponseByCookie(url, "", cookieStr);
 		Document document2=Jsoup.parse(response);
 		for(Element element:elements){

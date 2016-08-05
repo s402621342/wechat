@@ -18,6 +18,7 @@ import entity.Department;
 import model.User;
 import service.UserService;
 import wechat.Connection.HttpHelp;
+import wechat.Connection.Property;
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	public List<Department> getDepartments(Cookie[] cookies) {
 		// TODO Auto-generated method stub
 		List<Department> departments=new ArrayList<>();
-		String url="http://shqingyuan.f3322.net:81/xsgs/api.nsf/departmentList?openagent";
+		String url=Property.getDepartmentInterface();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -47,11 +48,11 @@ public class UserServiceImpl implements UserService {
 				
 			}
 			String name=element.attr("name");
-			String url2="http://shqingyuan.f3322.net:81/xsgs/api.nsf/userList?openagent&departmentId="+id;
+			String url2=Property.getUserInterface()+"&departmentId="+id;
 			String response2=HttpHelp.getResponseByCookie(url2, "", cookieStr);
 			Document document2=Jsoup.parse(response2);
 			Elements elements2=document2.select("user");
-			List<String> usernames=new ArrayList<>();
+			List<String> usernames=new ArrayL2ist<>();
 			for(Element element2:elements2){
 				usernames.add(element2.attr("fullname"));
 			}

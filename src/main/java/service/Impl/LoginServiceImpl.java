@@ -4,9 +4,10 @@ import javax.servlet.http.Cookie;
 
 import org.springframework.stereotype.Service;
 
-import Exception.InvalidUserException;
+import exception.InvalidUserException;
 import service.LoginService;
 import wechat.Connection.HttpHelp;
+import wechat.Connection.Property;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -14,7 +15,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public Cookie login(String username, String password) throws InvalidUserException{
 		// TODO Auto-generated method stub
-		String url="http://shqingyuan.f3322.net:81/names.nsf?login";
+		String url=Property.getLoginInterface();
 		String param="username="+username+"&password="+password+"";
 		try{
 			String response=HttpHelp.getOriginCookie(url, param);
