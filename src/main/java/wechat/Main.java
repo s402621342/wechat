@@ -1,5 +1,7 @@
 package wechat;
 
+import java.util.regex.Pattern;
+
 import wechat.Button.InitButton;
 import wechat.Connection.HttpHelp;
 
@@ -9,7 +11,7 @@ public class Main
     public static void main( String[] args )
     {
 //    	String type="swdb";
-//    	String username="张莹本部";
+//    	String username="李晓松";
 //    	String title="测试";
 //    	String msgid="082A3FBB4E1FC90148257EF500075FEE";
 //    	String date="2015年4月3日";
@@ -30,10 +32,10 @@ public class Main
 //    	}catch(Exception e){
 //    		
 //    	}
-//    	String url="http://192.168.2.76:8080/wechat/post?PostItem="+PostItem;
+//    	String url="http://192.168.2.81:8080/wechat/post?PostItem="+PostItem;
 //    	System.out.println(HttpHelp.createhttpClient(url, ""));
-    	InitButton initButton=new InitButton();
-    	System.out.println(initButton.initButtons());
+//    	InitButton initButton=new InitButton();
+//    	System.out.println(initButton.initButtons());
     }
     
     

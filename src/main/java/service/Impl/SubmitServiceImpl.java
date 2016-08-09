@@ -12,21 +12,28 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.PropertyDAO;
 import entity.Operation;
 import entity.SubmitEntity;
+import model.Property;
 import service.SubmitService;
 import wechat.Connection.HttpHelp;
-import wechat.Connection.Property;
 
 @Service
 public class SubmitServiceImpl implements SubmitService {
-
+	@Autowired
+	private PropertyDAO propertyDAO;
 	@Override
 	public List<Operation> getOperation(Cookie[] cookies, String type, String id) {
 		// TODO Auto-generated method stub
-		String url=Property.getDetailInterface()+"&type="+type+"&msgid="+id;
+		
+		Property property=propertyDAO.getByCode("detail");
+		String url=property.getPath();
+		url=url.replace("{0}", type);
+		url=url.replace("{1}", id);
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -101,7 +108,8 @@ public class SubmitServiceImpl implements SubmitService {
 	@Override
 	public Map<String, String> submit(Cookie[] cookies, SubmitEntity entity,String type,String id) {
 		// TODO Auto-generated method stub
-		String url=Property.getSubmitInterface();
+		Property property=propertyDAO.getByCode("submit");
+		String url=property.getPath();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -122,7 +130,10 @@ public class SubmitServiceImpl implements SubmitService {
 		}catch(Exception e){
 			
 		}
-		String param="submitResultItem="+submitResultItem+"&type="+type+"&itemId="+id;
+		String param=property.getParam();
+		param=param.replace("{0}", submitResultItem);
+		param=param.replace("{1}", type);
+		param=param.replace("{2}", id);
 	
 		String response=HttpHelp.getResponseByCookie(url, param, cookieStr);
 		Document document=Jsoup.parse(response);

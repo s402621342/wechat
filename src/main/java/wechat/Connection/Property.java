@@ -46,19 +46,20 @@ public class Property {
 		}
 		
 	}
-	public static String getLogUri(){
+
+	public static String getDetailUri(){
 		try{
 			Properties properties=getProperties();
-			return properties.getProperty("loguri");
+			return properties.getProperty("detailuri");
 		}catch(Exception e){
 			return "";
 		}
 		
 	}
-	public static String getDetailUri(){
+	public static String getSettingUri(){
 		try{
 			Properties properties=getProperties();
-			return properties.getProperty("detailuri");
+			return properties.getProperty("settinguri");
 		}catch(Exception e){
 			return "";
 		}

@@ -1,7 +1,5 @@
 package DAO.Impl;
 
-
-
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,72 +8,69 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import DAO.UserDAO;
-import model.User;
+import DAO.PropertyDAO;
+import model.Property;
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class PropertyDAOImpl implements PropertyDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	private Session getSession(){
 		return sessionFactory.openSession();
 	}
-	
 	@Override
-	public User getUserByID(String id) {
+	public void add(Property property) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from User where id=?");
-		query.setParameter(0, id);
-		List<User> users=query.list();
-		User user=null;
-		if(users.size()>0){
-			user=users.get(0);
+		session.save(property);
+		session.getTransaction().commit();
+		session.close();
+	}
+	@Override
+	public void delete(Property property) {
+		// TODO Auto-generated method stub
+		Session session=getSession();
+		session.beginTransaction();
+		session.delete(property);
+		session.getTransaction().commit();
+		session.close();
+	}
+	@Override
+	public void update(Property property) {
+		// TODO Auto-generated method stub
+		Session session=getSession();
+		session.beginTransaction();
+		session.update(property);
+		session.getTransaction().commit();
+		session.close();
+	}
+	@Override
+	public Property getByCode(String code) {
+		// TODO Auto-generated method stub
+		Session session=getSession();
+		session.beginTransaction();
+		Query query=session.createQuery("from Property where code=?");
+		query.setParameter(0, code);
+		List<Property> properties=query.list();
+		Property property=null;
+		if(properties.size()>0){
+			property=properties.get(0);
 		}
 		session.getTransaction().commit();
 		session.close();
-		return user;
+		return property;
 	}
-
 	@Override
-	public void addUser(User user) {
+	public List<Property> getAll() {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		session.saveOrUpdate(user);
+		Query query=session.createQuery("from Property");
+		List<Property> properties=query.list();
 		session.getTransaction().commit();
 		session.close();
-		
-	}
-
-	@Override
-	public User getUserByName(String username) {
-		Session session=getSession();
-		session.beginTransaction();
-		Query query=session.createQuery("from User where username=?");
-		query.setParameter(0, username);
-		List<User> users=query.list();
-		User user=null;
-		if(users.size()>0){
-			user=users.get(0);
-		}
-		session.getTransaction().commit();
-		session.close();
-		return user;
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteUser(String openid) {
-		// TODO Auto-generated method stub
-		User user=getUserByID(openid);
-		Session session=getSession();
-		session.beginTransaction();
-		session.delete(user);
-		session.getTransaction().commit();
-		session.close();
+		return properties;
 	}
 
 }

@@ -10,20 +10,29 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.PropertyDAO;
 import entity.OutLine;
 import entity.Tab;
+import model.Property;
 import service.CheckService;
 import wechat.Connection.HttpHelp;
-import wechat.Connection.Property;
 @Service
 public class CheckServiceImpl implements CheckService{
-
+	@Autowired
+	private PropertyDAO propertyDAO;
 
 	public List<OutLine> getOutLines(Cookie[] cookies,String type) {
 		// TODO Auto-generated method stub
-		String url=Property.getListInterface()+"&type="+type+"&requestSearch=&RowNum=0&PageSize=10";
+		Property property=propertyDAO.getByCode("list");
+		String url=property.getPath();
+		url=url.replace("{0}", type);
+		url=url.replace("{1}", "");
+		url=url.replace("{2}", "0");				//暂时只有第一页
+		url=url.replace("{3}", "10");
+		url=url.replace("{4}", "");
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -51,7 +60,8 @@ public class CheckServiceImpl implements CheckService{
 	public List<Tab> getTabs(Cookie[] cookies) {
 		// TODO Auto-generated method stub
 		List<Tab> tabs=new ArrayList<Tab>();
-		String url=Property.getTabInterface()+"&type=gw";
+		Property property=propertyDAO.getByCode("tab");
+		String url=property.getPath();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -63,7 +73,8 @@ public class CheckServiceImpl implements CheckService{
 		
 		Document document=Jsoup.parse(response);
 		Elements elements=document.select("tab");
-		url=Property.getNotificationInterface()+"&type=gw";
+		property=propertyDAO.getByCode("notification");
+		url=property.getPath();
 		response=HttpHelp.getResponseByCookie(url, "", cookieStr);
 		Document document2=Jsoup.parse(response);
 		for(Element element:elements){

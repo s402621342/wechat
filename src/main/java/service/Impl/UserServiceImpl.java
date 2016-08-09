@@ -13,23 +13,28 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.PropertyDAO;
 import DAO.UserDAO;
 import entity.Department;
+import model.Property;
 import model.User;
 import service.UserService;
 import wechat.Connection.HttpHelp;
-import wechat.Connection.Property;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private PropertyDAO propertyDAO;
 	@Autowired
 	private UserDAO userDAO;
 	
 	@Override
 	public List<Department> getDepartments(Cookie[] cookies) {
 		// TODO Auto-generated method stub
+		Property property=propertyDAO.getByCode("departmentlist");
+		String url=property.getPath();
+		url=url.replace("{0}", "");
 		List<Department> departments=new ArrayList<>();
-		String url=Property.getDepartmentInterface();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){
 			if(i!=0){
@@ -48,11 +53,13 @@ public class UserServiceImpl implements UserService {
 				
 			}
 			String name=element.attr("name");
-			String url2=Property.getUserInterface()+"&departmentId="+id;
+			Property property2=propertyDAO.getByCode("userList");
+			String url2=property2.getPath();
+			url2=url2.replace("{0}", id);
 			String response2=HttpHelp.getResponseByCookie(url2, "", cookieStr);
 			Document document2=Jsoup.parse(response2);
 			Elements elements2=document2.select("user");
-			List<String> usernames=new ArrayL2ist<>();
+			List<String> usernames=new ArrayList<>();
 			for(Element element2:elements2){
 				usernames.add(element2.attr("fullname"));
 			}
@@ -72,6 +79,12 @@ public class UserServiceImpl implements UserService {
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 		userDAO.addUser(user);
+	}
+
+	@Override
+	public void deleteUser(String username) {
+		// TODO Auto-generated method stub
+		userDAO.deleteUser(username);
 	}
 
 }

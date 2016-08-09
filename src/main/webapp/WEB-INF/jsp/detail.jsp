@@ -19,7 +19,11 @@ $(function(){
 	<c:forEach var="info" items="${basicInfo.value }" varStatus="sta">
 		var i=${status.index}
 		var j=${sta.index}
-		document.getElementById("b"+i+"-"+j).style.display="none";
+		if(i==0){						//第一项展开
+			document.getElementById("b"+i+"-"+j).style.display="block";
+		}else{
+			document.getElementById("b"+i+"-"+j).style.display="none";
+		}
 	</c:forEach>
 	</c:forEach>
 	
@@ -100,7 +104,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disBasic(${status.index})">
-							<div class="item-title label">${basicInfo.key }</div>
+							<h3 class="item-title label">${basicInfo.key }</h3>
 							<div class="item-input"></div>
 						</div>
 					</div>
@@ -128,7 +132,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disAttach(${status.index})">
-							<div class="item-title label">${attachment.key }</div>
+							<h3 class="item-title label">${attachment.key }</h3>
 							<div class="item-input"></div>
 						</div>
 					</div>
@@ -153,7 +157,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disOther(${status.index})">
-							<div class="item-title ">${otherInfo.key }</div>
+							<h3 class="item-title label">${otherInfo.key }</h3>
 						</div>
 					</div>
 

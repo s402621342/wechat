@@ -48,9 +48,6 @@
 	</div>
 	<script src="js/sm.js"></script>
 	<script src="js/sm-city-picker.js"></script>
-	<script>
-
-</script>
 </body>
 
 </html>

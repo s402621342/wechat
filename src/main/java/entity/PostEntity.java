@@ -1,7 +1,9 @@
 package entity;
 
+import java.util.List;
+
 public class PostEntity {
-	private String username;
+	private List<String> username;
 	
 	private String id;
 	
@@ -17,8 +19,8 @@ public class PostEntity {
 	
 	private String type;
 
-	public PostEntity(String username, String id, String title, String date, String autor, String state, long canopen,
-			String type) {
+	public PostEntity(List<String> username, String id, String title, String date, String autor, String state,
+			long canopen, String type) {
 		super();
 		this.username = username;
 		this.id = id;
@@ -30,11 +32,11 @@ public class PostEntity {
 		this.type = type;
 	}
 
-	public String getUsername() {
+	public List<String> getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(List<String> username) {
 		this.username = username;
 	}
 
@@ -93,6 +95,6 @@ public class PostEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+
+
 }

@@ -22,9 +22,15 @@ public class InitButton {
     	}
     	Button button1=new Button("view", "我的审批", "check", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Property.getAppID()+"&redirect_uri="+uri+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
     	List<Button> buttonlist=new ArrayList<Button>();
-//    	Button button2=new Button("view", "审批记录", "log", Property.getLogUri());
+    	try{
+    		uri=java.net.URLEncoder.encode(Property.getSettingUri(),"utf-8");
+    	}catch(Exception e){
+    		
+    	}
+    	
+    	Button button2=new Button("view", "个人设置", "setting", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Property.getAppID()+"&redirect_uri="+uri+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
     	buttonlist.add(button1);
-//    	buttonlist.add(button2);
+    	buttonlist.add(button2);
     	Buttons buttons=new Buttons(buttonlist);
     	return addButton(buttons);
     	
