@@ -15,22 +15,22 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import DAO.PropertyDAO;
+import DAO.PathDAO;
 import entity.Operation;
 import entity.SubmitEntity;
-import model.Property;
+import model.Path;
 import service.SubmitService;
-import wechat.Connection.HttpHelp;
+import wechat.HttpHelp;
 
 @Service
 public class SubmitServiceImpl implements SubmitService {
 	@Autowired
-	private PropertyDAO propertyDAO;
+	private PathDAO propertyDAO;
 	@Override
 	public List<Operation> getOperation(Cookie[] cookies, String type, String id) {
 		// TODO Auto-generated method stub
 		
-		Property property=propertyDAO.getByCode("detail");
+		Path property=propertyDAO.getByCode("detail");
 		String url=property.getPath();
 		url=url.replace("{0}", type);
 		url=url.replace("{1}", id);
@@ -108,7 +108,7 @@ public class SubmitServiceImpl implements SubmitService {
 	@Override
 	public Map<String, String> submit(Cookie[] cookies, SubmitEntity entity,String type,String id) {
 		// TODO Auto-generated method stub
-		Property property=propertyDAO.getByCode("submit");
+		Path property=propertyDAO.getByCode("submit");
 		String url=property.getPath();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){

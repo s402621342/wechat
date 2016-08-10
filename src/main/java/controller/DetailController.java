@@ -17,7 +17,7 @@ import model.User;
 import service.DetailService;
 import service.LoginService;
 import service.UserService;
-import wechat.Connection.OpenID;
+import service.WechatService;
 
 @Controller
 public class DetailController {
@@ -32,6 +32,9 @@ public class DetailController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired 
+	private WechatService wechatService;
 	
 	
 	@RequestMapping(value="/detail", method = { RequestMethod.GET, RequestMethod.POST })
@@ -49,7 +52,7 @@ public class DetailController {
 	public String getDetail(HttpServletRequest request,Map<String, Object> map,HttpServletResponse response){
 		String code=request.getParameter("code");
 		String openId="";
-		openId=OpenID.getOpenID(code);
+		openId=wechatService.getOpenID(code);
 		User user=userService.getUserByID(openId);
 		if(user!=null){
 			String username=user.getUsername();

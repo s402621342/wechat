@@ -17,7 +17,7 @@ import model.User;
 import net.sf.json.JSONObject;
 import service.LoginService;
 import service.UserService;
-import wechat.Connection.OpenID;
+import service.WechatService;
 
 @Controller
 public class UserController {
@@ -31,6 +31,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired 
+	private WechatService wechatService;
+	
 	
 	@RequestMapping(value="/settinglogin",method={ RequestMethod.GET, RequestMethod.POST }) 
 	public String settinglogin(HttpServletRequest request,
@@ -38,7 +41,7 @@ public class UserController {
 		String openId="";
 		try{
 			String code=request.getParameter("code");
-			openId=OpenID.getOpenID(code);
+			openId=wechatService.getOpenID(code);
 		}catch(Exception e){
 			openId=(String)request.getSession().getAttribute("openid");
 		}

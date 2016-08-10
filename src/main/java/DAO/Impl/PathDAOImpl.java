@@ -8,10 +8,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import DAO.PropertyDAO;
-import model.Property;
+import DAO.PathDAO;
+import model.Path;
 @Repository
-public class PropertyDAOImpl implements PropertyDAO {
+public class PathDAOImpl implements PathDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -19,7 +19,7 @@ public class PropertyDAOImpl implements PropertyDAO {
 		return sessionFactory.openSession();
 	}
 	@Override
-	public void add(Property property) {
+	public void add(Path property) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
@@ -28,7 +28,7 @@ public class PropertyDAOImpl implements PropertyDAO {
 		session.close();
 	}
 	@Override
-	public void delete(Property property) {
+	public void delete(Path property) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
@@ -37,7 +37,7 @@ public class PropertyDAOImpl implements PropertyDAO {
 		session.close();
 	}
 	@Override
-	public void update(Property property) {
+	public void update(Path property) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
@@ -46,14 +46,14 @@ public class PropertyDAOImpl implements PropertyDAO {
 		session.close();
 	}
 	@Override
-	public Property getByCode(String code) {
+	public Path getByCode(String code) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Property where code=?");
+		Query query=session.createQuery("from Path where code=?");
 		query.setParameter(0, code);
-		List<Property> properties=query.list();
-		Property property=null;
+		List<Path> properties=query.list();
+		Path property=null;
 		if(properties.size()>0){
 			property=properties.get(0);
 		}
@@ -62,12 +62,13 @@ public class PropertyDAOImpl implements PropertyDAO {
 		return property;
 	}
 	@Override
-	public List<Property> getAll() {
+	public List<Path> getAllByType(String type) {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Property");
-		List<Property> properties=query.list();
+		Query query=session.createQuery("from Path where type=?");
+		query.setParameter(0, type);
+		List<Path> properties=query.list();
 		session.getTransaction().commit();
 		session.close();
 		return properties;

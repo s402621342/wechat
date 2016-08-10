@@ -17,7 +17,7 @@ import model.User;
 import net.sf.json.JSONObject;
 import service.LoginService;
 import service.UserService;
-import wechat.Connection.OpenID;
+import service.WechatService;
 
 
 @Controller
@@ -30,12 +30,15 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired 
+	private WechatService wechatService;
+	
 	//载入登录界面
 	@RequestMapping(value="/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String prelogin(HttpServletRequest request,Map<String, Object> map,HttpServletResponse response){
 		String code=request.getParameter("code");
 		String openId="";
-		openId=OpenID.getOpenID(code);
+		openId=wechatService.getOpenID(code);
 		User user=userService.getUserByID(openId);
 		if(user!=null){
 			String username=user.getUsername();

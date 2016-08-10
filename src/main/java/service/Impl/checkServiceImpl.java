@@ -13,20 +13,20 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import DAO.PropertyDAO;
+import DAO.PathDAO;
 import entity.OutLine;
 import entity.Tab;
-import model.Property;
+import model.Path;
 import service.CheckService;
-import wechat.Connection.HttpHelp;
+import wechat.HttpHelp;
 @Service
 public class CheckServiceImpl implements CheckService{
 	@Autowired
-	private PropertyDAO propertyDAO;
+	private PathDAO propertyDAO;
 
 	public List<OutLine> getOutLines(Cookie[] cookies,String type) {
 		// TODO Auto-generated method stub
-		Property property=propertyDAO.getByCode("list");
+		Path property=propertyDAO.getByCode("list");
 		String url=property.getPath();
 		url=url.replace("{0}", type);
 		url=url.replace("{1}", "");
@@ -60,7 +60,7 @@ public class CheckServiceImpl implements CheckService{
 	public List<Tab> getTabs(Cookie[] cookies) {
 		// TODO Auto-generated method stub
 		List<Tab> tabs=new ArrayList<Tab>();
-		Property property=propertyDAO.getByCode("tab");
+		Path property=propertyDAO.getByCode("tab");
 		String url=property.getPath();
 		String cookieStr="";
 		for(int i=0;i<cookies.length;i++){

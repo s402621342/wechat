@@ -9,14 +9,14 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.InfoDAO;
 import DAO.UserDAO;
 import entity.PostEntity;
 import model.User;
 import net.sf.json.JSONObject;
 import service.PostService;
-import wechat.Connection.HttpHelp;
-import wechat.Connection.Property;
-import wechat.Connection.Token;
+import service.WechatService;
+import wechat.HttpHelp;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -24,20 +24,28 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private InfoDAO infoDao;
+	
+	@Autowired
+	private WechatService wechatService;
+	
 	@Override
 	public String post(PostEntity entity) {
 		// TODO Auto-generated method stub
-		String posturl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + Token.getToken();
+		String posturl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + wechatService.getToken();
 		String topcolor = "#FF0000";
-		String template_id = Property.getTemplateID();
+		String template_id = infoDao.getbyName("template").getValue();
 		String color = "#173177";
-		String redirect_uri = Property.getDetailUri() + "?type=" + entity.getType() + "&id=" + entity.getId();
+		String detailUri=infoDao.getbyName("wechat").getValue()+"/toDetail";
+		String redirect_uri = detailUri + "?type=" + entity.getType() + "&id=" + entity.getId();
 		try {
 			redirect_uri = java.net.URLEncoder.encode(redirect_uri, "utf-8");
 		} catch (Exception e) {
 
 		}
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + Property.getAppID()
+		String appID=infoDao.getbyName("appID").getValue();
+		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appID
 				+ "&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 
 		// 构建JSON

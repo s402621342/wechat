@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Property")
-public class Property {
+@Table(name="Path")
+public class Path {
 	@Id
 	@Column(name="id")
 	private long id;
@@ -24,8 +24,11 @@ public class Property {
 	@Column(name="param")
 	private String param;
 	
+	@Column(name="type")
+	private String type;
 	
-	public Property() {
+	
+	public Path() {
 		super();
 	}
 
@@ -67,6 +70,14 @@ public class Property {
 
 	public void setParam(String param) {
 		this.param = param;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	

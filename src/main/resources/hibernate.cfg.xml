@@ -36,13 +36,8 @@
 
 
 <mapping class="model.User"/>
-<mapping class="model.Property">
-<id name="id" column="id">
-
-<generator class="increment" />
-
-</id>
-</mapping>
+<mapping class="model.Path"/>
+<mapping class="model.Info"/>
 
     </session-factory>
 </hibernate-configuration>

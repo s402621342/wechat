@@ -1,4 +1,4 @@
-package wechat.Button;
+package entity;
 
 
 public class Button {

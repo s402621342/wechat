@@ -2,21 +2,27 @@ package service.Impl;
 
 import javax.servlet.http.Cookie;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import DAO.InfoDAO;
 import exception.InvalidUserException;
 import service.LoginService;
-import wechat.Connection.HttpHelp;
-import wechat.Connection.Property;
+import wechat.HttpHelp;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
+	@Autowired
+	private InfoDAO infoDao;
+	
 	@Override
 	public Cookie login(String username, String password) throws InvalidUserException{
 		// TODO Auto-generated method stub
-		String url=Property.getLoginInterface();
-		String param="username="+username+"&password="+password+"";
+		String url=infoDao.getbyName("autopath").getValue();
+		String param=infoDao.getbyName("autoparam").getValue();
+		param=param.replace("{0}", username);
+		param=param.replace("{1}", password);
 		try{
 			String response=HttpHelp.getOriginCookie(url, param);
 		

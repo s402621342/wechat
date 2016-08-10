@@ -13,25 +13,25 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import DAO.PropertyDAO;
+import DAO.PathDAO;
 import DAO.UserDAO;
 import entity.Department;
-import model.Property;
+import model.Path;
 import model.User;
 import service.UserService;
-import wechat.Connection.HttpHelp;
+import wechat.HttpHelp;
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private PropertyDAO propertyDAO;
+	private PathDAO propertyDAO;
 	@Autowired
 	private UserDAO userDAO;
 	
 	@Override
 	public List<Department> getDepartments(Cookie[] cookies) {
 		// TODO Auto-generated method stub
-		Property property=propertyDAO.getByCode("departmentlist");
+		Path property=propertyDAO.getByCode("departmentlist");
 		String url=property.getPath();
 		url=url.replace("{0}", "");
 		List<Department> departments=new ArrayList<>();
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 				
 			}
 			String name=element.attr("name");
-			Property property2=propertyDAO.getByCode("userList");
+			Path property2=propertyDAO.getByCode("userList");
 			String url2=property2.getPath();
 			url2=url2.replace("{0}", id);
 			String response2=HttpHelp.getResponseByCookie(url2, "", cookieStr);
