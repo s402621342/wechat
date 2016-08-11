@@ -34,12 +34,18 @@
 </head>
 <body>
 	<div class="content">
-		欢迎您！${username }
-			<div class="content-block">
-				<div class="row">
-					<input class="button button-big button-fill button-warning" type="button" onclick="logout()" value="注销">
-				</div>
+		<div class="content-block">
+			<ul>
+				<li>欢迎您！${username }</li>
+			</ul>
+		</div>
+
+		<div class="content-block">
+			<div class="row">
+				<input class="button button-big button-fill button-warning"
+					type="button" onclick="logout()" value="注销">
 			</div>
+		</div>
 	</div>
 	<script src="js/sm.js"></script>
 	<script src="js/sm-city-picker.js"></script>

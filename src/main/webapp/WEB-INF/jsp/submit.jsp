@@ -489,7 +489,7 @@ function submit(){
 								</ul>
 							</div>
 						</c:forEach>
-						<br>
+						<br/>
 					</div>
 				</c:if>
 			</c:if>

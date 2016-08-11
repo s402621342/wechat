@@ -1,7 +1,7 @@
 package service.Impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,16 +42,15 @@ public class DetailServiceImpl implements DetailService {
 		String response=HttpHelp.getResponseByCookie(url, "", cookieStr);
 		Document document=Jsoup.parse(response);
 		Elements elements=document.select("form");
-		
-		Map<String, Map<String, String>> basicInfo=new HashMap<>();
-		Map<String, Map<String, String>> attachment=new HashMap<>();
-		Map<String, List<OtherInfo>> otherInfo=new HashMap<>();	
+		Map<String, Map<String, String>> basicInfo=new LinkedHashMap<>();
+		Map<String, Map<String, String>> attachment=new LinkedHashMap<>();
+		Map<String, List<OtherInfo>> otherInfo=new LinkedHashMap<>();	
 		boolean canOperate;
 		if(elements.size()>0){
 			elements=elements.select("table");
 			for(Element element:elements){
 				if(element.attr("columns").equals("2")){				//基础信息
-					Map<String, String> map=new HashMap<>();
+					Map<String, String> map=new LinkedHashMap<>();
 					String title=element.attr("title");
 					Elements elements2=element.select("td");
 					for(int i=0;i<elements2.size()-1;i+=2){
@@ -62,7 +61,7 @@ public class DetailServiceImpl implements DetailService {
 					String title=element.attr("title");
 					Elements elements2=element.select("input");
 					if(elements2.size()>0){						//附件正文等以input开头
-						Map<String, String> map=new HashMap<>();
+						Map<String, String> map=new LinkedHashMap<>();
 						for(Element element2:elements2){					
 							map.put(element2.attr("title"), element2.attr("value"));
 						}
@@ -81,10 +80,10 @@ public class DetailServiceImpl implements DetailService {
 									tableTitle.add(element2.text());
 								}
 							}else{
-								Map<String, Map<String, Boolean>> info=new HashMap<>();
+								Map<String, Map<String, Boolean>> info=new LinkedHashMap<>();
 								Elements elements4=elements3.get(i).select("td");			//表格内容
 								for(int j=0;j<elements4.size()&&j<tableTitle.size();j++){
-									Map<String, Boolean> src=new HashMap<>();
+									Map<String, Boolean> src=new LinkedHashMap<>();
 									String in;
 									Boolean isImg=elements4.get(j).select("img").size()>0;
 									if(isImg){

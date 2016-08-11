@@ -33,6 +33,10 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public String post(PostEntity entity) {
 		// TODO Auto-generated method stub
+		String result="";
+		if("1".equals(infoDao.getbyName("radio").getValue())){				//如果进行推送
+			
+		
 		String posturl = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + wechatService.getToken();
 		String topcolor = "#FF0000";
 		String template_id = infoDao.getbyName("template").getValue();
@@ -70,16 +74,19 @@ public class PostServiceImpl implements PostService {
 		JSONObject finalObject = new JSONObject();
 		List<String> usernames = entity.getUsername();
 		for (String username : usernames) {
-			User user = userDAO.getUserByName(username);
-			if (user != null) {
+			List<User> users = userDAO.getUserByName(username);
+			for(User user:users){
 				finalObject.put("touser", user.getId());
 				finalObject.put("url", url);
 				finalObject.put("template_id", template_id);
 				finalObject.put("topcolor", topcolor);
 				finalObject.put("data", data);
+				result=HttpHelp.createhttpClient(posturl, finalObject.toString());
 			}
 		}
-		return HttpHelp.createhttpClient(posturl, finalObject.toString());
+		}else{
+		}
+		return result;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public class Main
     public static void main( String[] args )
     {
     	String type="swdb";
-    	String username="admin";
+    	String username="高进";
     	String title="测试";
     	String msgid="082A3FBB4E1FC90148257EF500075FEE";
     	String date="2015年4月3日";

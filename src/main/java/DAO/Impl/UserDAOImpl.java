@@ -50,19 +50,15 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getUserByName(String username) {
+	public List<User> getUserByName(String username) {
 		Session session=getSession();
 		session.beginTransaction();
 		Query query=session.createQuery("from User where username=?");
 		query.setParameter(0, username);
 		List<User> users=query.list();
-		User user=null;
-		if(users.size()>0){
-			user=users.get(0);
-		}
 		session.getTransaction().commit();
 		session.close();
-		return user;
+		return users;
 		// TODO Auto-generated method stub
 		
 	}

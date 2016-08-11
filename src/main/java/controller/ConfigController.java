@@ -87,10 +87,11 @@ public class ConfigController {
 			String code = request.getParameter("code");
 			String param = request.getParameter("param");
 			String path = request.getParameter("path");
+			String type=request.getParameter("type");
 			Path path2 = new Path();
 			String id = request.getParameter("id");
 			path2.setId(Long.parseLong(id));
-
+			path2.setType(type);
 			path2.setCode(code);
 			path2.setName(name);
 			path2.setParam(param);
@@ -146,7 +147,7 @@ public class ConfigController {
 			
 			
 			
-			wechatService.initButtons();				//重新生成按钮
+			System.out.println(wechatService.initButtons());				//重新生成按钮
 	    	
 	    	
 			map.put("success", "true");

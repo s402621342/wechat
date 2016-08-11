@@ -1,5 +1,7 @@
 package DAO;
 
+import java.util.List;
+
 import model.User;
 
 public interface UserDAO {
@@ -7,7 +9,7 @@ public interface UserDAO {
 	
 	public void addUser(User user);
 	
-	public User getUserByName(String username);
+	public List<User> getUserByName(String username);
 	
 	public void deleteUser(String username);
 	

@@ -124,6 +124,7 @@ $(function(){
 			success:function(data){
 				if(data.success=="true"){
 					alert("更新成功");
+					window.location.href="config";
 				}else{
 					alert("更新失败");
 				}
@@ -185,70 +186,80 @@ $(function(){
 <body>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<div class="panel-title">模块基本信息
-			<button type="button" class="btn btn-default navbar-right" onclick="saveBasic()">保存</button>
+			<div class="panel-title">
+				模块基本信息
+				<button type="button" class="btn btn-default navbar-right"
+					onclick="saveBasic()">保存</button>
 			</div>
 		</div>
 		<div class="panel-body">
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">模块名称</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="basic1">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="basic1">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">模块备注</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="basic2">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="basic2">
 			</div>
 		</div>
 	</div>
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<div class="panel-title">身份认证
-			</div>
+			<div class="panel-title">身份认证</div>
 		</div>
 		<div class="panel-body">
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">认证类型</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="auth1">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="auth1">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">Cookie </span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="auth2">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="auth2">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">认证地址</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="auth3">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="auth3">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">认证参数</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="auth4">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="auth4">
 			</div>
 		</div>
 	</div>
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<div class="panel-title">微信推送
-			</div>
+			<div class="panel-title">微信推送</div>
 		</div>
 		<div class="panel-body">
-		是否进行微信推送 <input type="radio" name="post" value="1">是
-		<input type="radio" name="post" value="0" >否
-		<div class="input-group">
+			是否进行微信推送 <input type="radio" name="post" value="1">是 <input
+				type="radio" name="post" value="0">否
+			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">微信URL地址</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="wechat">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="wechat">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">appID</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="appID">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="appID">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">appsecret</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="appsecret">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="appsecret">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon" id="basic-addon1">template</span> <input
-					type="text" class="form-control" aria-describedby="basic-addon1" id="template">
+					type="text" class="form-control" aria-describedby="basic-addon1"
+					id="template">
 			</div>
 		</div>
 	</div>
@@ -258,13 +269,14 @@ $(function(){
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
 		<div class="panel-heading">
-			<div class="panel-title">配置数据源
+			<div class="panel-title">
+				配置数据源
 
 
-			<button type="button" class="btn btn-default navbar-right">导入</button>
-			<button type="button" class="btn btn-default navbar-right"
-				data-toggle="modal" data-target="#addModal">新建</button>
-				</div>
+				<button type="button" class="btn btn-default navbar-right">导入</button>
+				<button type="button" class="btn btn-default navbar-right"
+					data-toggle="modal" data-target="#addModal">新建</button>
+			</div>
 		</div>
 
 		<table class="table">

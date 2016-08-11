@@ -27,6 +27,7 @@ public class WechatServiceImpl implements WechatService {
         String response=HttpHelp.createhttpClient(url,"");
         JSONObject json=JSONObject.fromObject(response);
         String ACCESS_TOKEN=json.get("access_token").toString();
+        System.out.println(ACCESS_TOKEN);
         return ACCESS_TOKEN;
 	}
 
