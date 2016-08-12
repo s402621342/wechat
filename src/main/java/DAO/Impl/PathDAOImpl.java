@@ -50,8 +50,8 @@ public class PathDAOImpl implements PathDAO {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Path where code=?");
-		query.setParameter(0, code);
+		Query query=session.createQuery("from Path where code=:code");
+		query.setParameter("code", code);
 		List<Path> properties=query.list();
 		Path property=null;
 		if(properties.size()>0){
@@ -66,8 +66,8 @@ public class PathDAOImpl implements PathDAO {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Path where type=?");
-		query.setParameter(0, type);
+		Query query=session.createQuery("from Path where type=:type");
+		query.setParameter("type", type);
 		List<Path> properties=query.list();
 		session.getTransaction().commit();
 		session.close();

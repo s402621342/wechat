@@ -31,7 +31,7 @@ public class SubmitController {
 	@Autowired
 	private UserService UserService;
 	
-	
+	//载入提交界面
 	@RequestMapping(value="/submit",method={ RequestMethod.GET, RequestMethod.POST }) 
 	public String submit(HttpServletRequest request,
 			Map<String, Object> map,HttpServletResponse response){
@@ -51,6 +51,7 @@ public class SubmitController {
 		return SUBMIT;
 	}
 	
+	//真正的提交操作
 	@RequestMapping(value="/aftersubmit",method={ RequestMethod.GET, RequestMethod.POST }) 
 	public @ResponseBody String reject(HttpServletRequest request,
 			Map<String, Object> map,HttpServletResponse response){

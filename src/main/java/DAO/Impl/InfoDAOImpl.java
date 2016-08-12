@@ -37,8 +37,8 @@ public class InfoDAOImpl implements InfoDAO {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Info where type=?");
-		query.setParameter(0, type);
+		Query query=session.createQuery("from Info where type=:type");
+		query.setParameter("type", type);
 		List<Info> infos=query.list();
 		session.getTransaction().commit();
 		session.close();
@@ -49,8 +49,8 @@ public class InfoDAOImpl implements InfoDAO {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from Info where name=?");
-		query.setParameter(0, name);
+		Query query=session.createQuery("from Info where name=:name");
+		query.setParameter("name", name);
 		List<Info> infos=query.list();
 		Info info=null;
 		if(infos.size()>0){

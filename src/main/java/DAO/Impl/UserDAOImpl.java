@@ -26,8 +26,8 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from User where id=?");
-		query.setParameter(0, id);
+		Query query=session.createQuery("from User where id=:id");
+		query.setParameter("id", id);
 		List<User> users=query.list();
 		User user=null;
 		if(users.size()>0){
@@ -53,8 +53,8 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> getUserByName(String username) {
 		Session session=getSession();
 		session.beginTransaction();
-		Query query=session.createQuery("from User where username=?");
-		query.setParameter(0, username);
+		Query query=session.createQuery("from User where username=:username");
+		query.setParameter(username, username);
 		List<User> users=query.list();
 		session.getTransaction().commit();
 		session.close();

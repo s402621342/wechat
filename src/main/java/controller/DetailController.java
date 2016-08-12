@@ -47,7 +47,7 @@ public class DetailController {
 		return DETAIL;
 	}
 	
-	//直接进入detail
+	//在用户收到推送时，直接进入detail
 	@RequestMapping(value="/toDetail", method = { RequestMethod.GET, RequestMethod.POST })
 	public String getDetail(HttpServletRequest request,Map<String, Object> map,HttpServletResponse response){
 		String code=request.getParameter("code");

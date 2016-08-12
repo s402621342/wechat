@@ -10,14 +10,14 @@ public class Information {
 
 	private boolean canOperate;
 	
-	private Map<String, Map<String, String>> basicInfo;
+	private Map<DisplayName, Map<String, String>> basicInfo;		//概要，其他信息
 	
-	private Map<String, Map<String, String>> attachment;
+	private Map<DisplayName, Map<String, String>> attachment;		//附件，正文
 	
-	private Map<String, List<OtherInfo>> otherInfo;				//流程、意见等
+	private Map<DisplayName, List<OtherInfo>> otherInfo;				//流程、意见等
 
-	public Information(String id, String type, boolean canOperate, Map<String, Map<String, String>> basicInfo,
-			Map<String, Map<String, String>> attachment, Map<String, List<OtherInfo>> otherInfo) {
+	public Information(String id, String type, boolean canOperate, Map<DisplayName, Map<String, String>> basicInfo,
+			Map<DisplayName, Map<String, String>> attachment, Map<DisplayName, List<OtherInfo>> otherInfo) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -51,35 +51,30 @@ public class Information {
 		this.canOperate = canOperate;
 	}
 
-	public Map<String, Map<String, String>> getBasicInfo() {
+	public Map<DisplayName, Map<String, String>> getBasicInfo() {
 		return basicInfo;
 	}
 
-	public void setBasicInfo(Map<String, Map<String, String>> basicInfo) {
+	public void setBasicInfo(Map<DisplayName, Map<String, String>> basicInfo) {
 		this.basicInfo = basicInfo;
 	}
 
-	public Map<String, Map<String, String>> getAttachment() {
+	public Map<DisplayName, Map<String, String>> getAttachment() {
 		return attachment;
 	}
 
-	public void setAttachment(Map<String, Map<String, String>> attachment) {
+	public void setAttachment(Map<DisplayName, Map<String, String>> attachment) {
 		this.attachment = attachment;
 	}
 
-	public Map<String, List<OtherInfo>> getOtherInfo() {
+	public Map<DisplayName, List<OtherInfo>> getOtherInfo() {
 		return otherInfo;
 	}
 
-	public void setOtherInfo(Map<String, List<OtherInfo>> otherInfo) {
+	public void setOtherInfo(Map<DisplayName, List<OtherInfo>> otherInfo) {
 		this.otherInfo = otherInfo;
 	}
-	
-
 
 	
-
-
 	
-
 }

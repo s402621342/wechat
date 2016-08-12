@@ -52,7 +52,7 @@ public class PostServiceImpl implements PostService {
 		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appID
 				+ "&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 
-		// 构建JSON
+		// 构建JSON,准备进行推送
 		JSONObject data = new JSONObject();
 		JSONObject object = new JSONObject();
 		object.put("value", entity.getTitle());

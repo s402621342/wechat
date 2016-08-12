@@ -34,7 +34,7 @@ public class UserController {
 	@Autowired 
 	private WechatService wechatService;
 	
-	
+	//设置里的登录跳转有所不同
 	@RequestMapping(value="/settinglogin",method={ RequestMethod.GET, RequestMethod.POST }) 
 	public String settinglogin(HttpServletRequest request,
 			Map<String, Object> map,HttpServletResponse response){
@@ -67,7 +67,7 @@ public class UserController {
 	}
 	
 	
-	
+	//个人设置
 	@RequestMapping(value="/setting",method={ RequestMethod.GET, RequestMethod.POST }) 
 	public String setting(HttpServletRequest request,
 			Map<String, Object> map,HttpServletResponse response){

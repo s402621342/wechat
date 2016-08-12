@@ -15,11 +15,13 @@
 <script src="js/config.js"></script>
 <script type="text/javascript">
 $(function(){
+	var display;
 	<c:forEach var="basicInfo" items="${information.basicInfo }"  varStatus="status">
+		display="${basicInfo.key.display}";
 	<c:forEach var="info" items="${basicInfo.value }" varStatus="sta">
-		var i=${status.index}
+	var i=${status.index}
 		var j=${sta.index}
-		if(i==0){						//第一项展开
+		if(display=="true"){						
 			document.getElementById("b"+i+"-"+j).style.display="block";
 		}else{
 			document.getElementById("b"+i+"-"+j).style.display="none";
@@ -28,18 +30,29 @@ $(function(){
 	</c:forEach>
 	
 	<c:forEach var="attachment" items="${information.attachment }" varStatus="status">
+	display="${attachment.key.display}";
 	<c:forEach var="info" items="${attachment.value }" varStatus="sta">
 		var i=${status.index}
 		var j=${sta.index}
-		document.getElementById("a"+i+"-"+j).style.display="none";
+		if(display=="true"){						
+			document.getElementById("a"+i+"-"+j).style.display="block";
+		}else{
+			document.getElementById("a"+i+"-"+j).style.display="none";
+		}
+		
 	</c:forEach>
 	</c:forEach>
 	
 	<c:forEach var="otherInfo" items="${information.otherInfo }" varStatus="status">
+	display="${otherInfo.key.display}";
 	<c:forEach var="inf" items="${otherInfo.value }"  varStatus="sta">
 		var i=${status.index}
 		var j=${sta.index}
-		document.getElementById("o"+i+"-"+j).style.display="none";
+		if(display=="true"){						
+			document.getElementById("o"+i+"-"+j).style.display="block";
+		}else{
+			document.getElementById("o"+i+"-"+j).style.display="none";
+		}
 	</c:forEach>
 	</c:forEach>
 	
@@ -104,7 +117,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disBasic(${status.index})">
-							<h3 class="item-title label">${basicInfo.key }</h3>
+							<h3 class="item-title label">${basicInfo.key.name }</h3>
 							<div class="item-input"></div>
 						</div>
 					</div>
@@ -132,7 +145,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disAttach(${status.index})">
-							<h3 class="item-title label">${attachment.key }</h3>
+							<h3 class="item-title label">${attachment.key.name }</h3>
 							<div class="item-input"></div>
 						</div>
 					</div>
@@ -157,7 +170,7 @@ function disOther(index){
 				<li>
 					<div class="item-content">
 						<div class="item-inner" onclick="disOther(${status.index})">
-							<h3 class="item-title label">${otherInfo.key }</h3>
+							<h3 class="item-title label">${otherInfo.key.name }</h3>
 						</div>
 					</div>
 
@@ -199,7 +212,7 @@ function disOther(index){
 <nav class="bar bar-tab">
 	<c:if test="${information.canOperate }">
 		<a href="submit?type=${information.type }&id=${information.id}"
-			class="button button-big button-fill button-success">提交</a>
+			class="button button-big button-fill button-success">操作</a>
 	</c:if>
 	<c:if test="${information.canOperate==false }">
 	<div class="color-gray">请在电脑端处理</div>

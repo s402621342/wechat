@@ -33,7 +33,7 @@ public class ConfigController {
 
 	@RequestMapping(value = "/config", method = { RequestMethod.GET, RequestMethod.POST })
 	public String config(HttpServletRequest request, Map<String, Object> map) {
-		String type="gw";
+		String type="gw";		//type暂时默认为gw
 		List<Path> properties = pathService.getAllByType(type);
 		List<Info> infos=infoService.getAllByType(type);
 		for(Info info:infos){

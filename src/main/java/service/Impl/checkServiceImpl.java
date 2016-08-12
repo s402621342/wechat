@@ -1,7 +1,6 @@
 package service.Impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -88,8 +87,8 @@ public class CheckServiceImpl implements CheckService{
 			String name=element.attr("title");
 			tabs.add(new Tab(id, name, count));
 		}
-		
-		Collections.sort(tabs);
+		//从大到小排序用
+//		Collections.sort(tabs);	
 		return tabs;
 	}
 
